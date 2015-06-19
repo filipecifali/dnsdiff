@@ -1,0 +1,31 @@
+;; Zone dump (Knot DNS 1.6.4)
+cifa.li.				3600	SOA	dns1.kinghost.com.br. abuse.kinghost.net. 2015050853 259200 3600 604800 3600
+cifa.li.				3600	A	189.38.80.87
+cifa.li.				3600	MX	5 mx-vip-01.kinghost.net.
+cifa.li.				3600	MX	5 mx-vip-02.kinghost.net.
+cifa.li.				3600	NS	dns1.kinghost.com.br.
+cifa.li.				3600	NS	dns2.kinghost.com.br.
+cifa.li.				3600	NS	dns3.kinghost.com.br.
+cifa.li.				3600	NS	dns4.kinghost.com.br.
+cifa.li.				3600	NS	dns5.kinghost.com.br.
+cifa.li.				3600	NS	dns6.kinghost.com.br.
+cifa.li.				3600	TXT	"v=spf1 include:_spf.kinghost.net -all"
+agenda.cifa.li.			3600	CNAME	ghs.googlehosted.com.
+docs.cifa.li.			3600	CNAME	ghs.googlehosted.com.
+drive.cifa.li.			3600	CNAME	ghs.googlehosted.com.
+firebird.cifa.li.		3600	A	189.38.85.64
+ftp.cifa.li.			3600	A	189.38.80.87
+imap.cifa.li.			3600	A	177.185.197.169
+mail.cifa.li.			3600	CNAME	smtp-vip.kinghost.net.
+mssql.cifa.li.			3600	A	191.6.194.190
+mysql.cifa.li.			3600	A	189.38.85.116
+pgsql.cifa.li.			3600	A	189.38.85.112
+pop.cifa.li.			3600	A	177.185.197.169
+sites.cifa.li.			3600	CNAME	ghs.googlehosted.com.
+smtp.cifa.li.			3600	CNAME	smtp-vip.kinghost.net.
+start.cifa.li.			3600	CNAME	ghs.googlehosted.com.
+webmail.cifa.li.		3600	CNAME	ghs.googlehosted.com.
+websvn.cifa.li.			3600	A	189.38.85.98
+www.cifa.li.			3600	A	189.38.80.87
+;; Written 28 records
+;; Time 2015-06-17 18:24:40 BRT
