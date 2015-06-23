@@ -76,7 +76,7 @@ else:
                 rtype = q[2].lower()
                 queries[record] = rtype
             elif q[0].split('.')[0] == domain.split('.')[0]:
-                rtype = q[2].lower()
+                rtype = q[3].lower()
                 try:
                     if queries['@'] and rtype not in queries['@']:
                         queries['@'].append(rtype)
