@@ -184,12 +184,12 @@ for query, rtype in queries.iteritems():
             if not tmp_result1 and not tmp_result2:
                 print bcolors.WARNING + domain, "NOT FOUND", r.upper() + bcolors.ENDC
                 try:
-                    if rjson['WARNING'][rtype] and query not in rjson['WARNING'][rtype]:
-                        rjson['WARNING'][rtype].append(query)
+                    if rjson['WARNING'][r] and query not in rjson['WARNING'][r]:
+                        rjson['WARNING'][r].append(query)
                 except KeyError:
-                    rjson['WARNING'][rtype] = []
-                    rjson['WARNING'][rtype].append(query)
-            elif tmp_result1.sort() == tmp_result2.sort():
+                    rjson['WARNING'][r] = []
+                    rjson['WARNING'][r].append(query)
+            elif tmp_result1 == tmp_result2:
                 if verbosity > 0:
                     print bcolors.OKGREEN + domain, "OK", r.upper(), "Address => Nameserver(s): '" \
                         + str(tmp_result1) + "' && Nameserver(s): '" + str(tmp_result2) + "'" + bcolors.ENDC
@@ -197,11 +197,11 @@ for query, rtype in queries.iteritems():
                     print bcolors.OKGREEN + domain, "OK", r.upper() + bcolors.ENDC
 
                 try:
-                    if rjson['OK'][rtype] and query not in rjson['OK'][rtype]:
-                        rjson['OK'][rtype].append(query)
+                    if rjson['OK'][r] and query not in rjson['OK'][r]:
+                        rjson['OK'][r].append(query)
                 except KeyError:
-                    rjson['OK'][rtype] = []
-                    rjson['OK'][rtype].append(query)
+                    rjson['OK'][r] = []
+                    rjson['OK'][r].append(query)
 
             else:
                 print bcolors.FAIL + domain, "FAIL", r.upper(), "Nameserver(s): '" + str(dns_server1)\
@@ -209,8 +209,8 @@ for query, rtype in queries.iteritems():
                     + "', : result: '" + str(tmp_result2) + "'" + bcolors.ENDC
 
             try:
-                if rjson['FAIL'][rtype] and query not in rjson['FAIL'][rtype]:
-                    rjson['FAIL'][rtype].append(query)
+                if rjson['FAIL'][r] and query not in rjson['FAIL'][r]:
+                    rjson['FAIL'][r].append(query)
             except KeyError:
-                rjson['FAIL'][rtype] = []
-                rjson['FAIL'][rtype].append(query)
+                rjson['FAIL'][r] = []
+                rjson['FAIL'][r].append(query)
