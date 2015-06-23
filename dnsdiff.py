@@ -102,9 +102,9 @@ for server in dns2:
         dns_server2.append(server)
 
 for query, rtype in queries.iteritems():
-    tmp_result1 = []
-    tmp_result2 = []
     if query != '' and query != '@':
+        tmp_result1 = []
+        tmp_result2 = []
         try:
             sys_r.nameservers = dns_server1
             for record in sys_r.query('.'.join([query, domain]), rtype).rrset.items:
@@ -123,7 +123,7 @@ for query, rtype in queries.iteritems():
         except NoNameservers:
             tmp_result2.append(None)
 
-        if len(tmp_result1) == 0 and len(tmp_result2) == 0:
+        if not tmp_result1 and not tmp_result2:
             print bcolors.WARNING + query, "NOT FOUND", rtype.upper() + bcolors.ENDC
             try:
                 if rjson['WARNING'][rtype] and query not in rjson['WARNING'][rtype]:
@@ -159,6 +159,8 @@ for query, rtype in queries.iteritems():
                 rjson['FAIL'][rtype].append(query)
     else:
         for r in rtype:
+            tmp_result1 = []
+            tmp_result2 = []
             try:
                 sys_r.nameservers = dns_server1
                 for record in sys_r.query(domain, r).rrset.items:
@@ -177,7 +179,9 @@ for query, rtype in queries.iteritems():
             except NoNameservers:
                 tmp_result2.append(None)
 
-            if len(tmp_result1) == 0 and len(tmp_result2) == 0:
+            tmp_result1.sort()
+            tmp_result2.sort()
+            if not tmp_result1 and not tmp_result2:
                 print bcolors.WARNING + domain, "NOT FOUND", r.upper() + bcolors.ENDC
                 try:
                     if rjson['WARNING'][rtype] and query not in rjson['WARNING'][rtype]:
@@ -191,7 +195,22 @@ for query, rtype in queries.iteritems():
                         + str(tmp_result1) + "' && Nameserver(s): '" + str(tmp_result2) + "'" + bcolors.ENDC
                 else:
                     print bcolors.OKGREEN + domain, "OK", r.upper() + bcolors.ENDC
+
+                try:
+                    if rjson['OK'][rtype] and query not in rjson['OK'][rtype]:
+                        rjson['OK'][rtype].append(query)
+                except KeyError:
+                    rjson['OK'][rtype] = []
+                    rjson['OK'][rtype].append(query)
+
             else:
                 print bcolors.FAIL + domain, "FAIL", r.upper(), "Nameserver(s): '" + str(dns_server1)\
                     + "' : result: '" + str(tmp_result1) + "' || Nameserver(s): '" + str(dns_server2)\
                     + "', : result: '" + str(tmp_result2) + "'" + bcolors.ENDC
+
+            try:
+                if rjson['FAIL'][rtype] and query not in rjson['FAIL'][rtype]:
+                    rjson['FAIL'][rtype].append(query)
+            except KeyError:
+                rjson['FAIL'][rtype] = []
+                rjson['FAIL'][rtype].append(query)
