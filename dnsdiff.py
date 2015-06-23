@@ -30,6 +30,9 @@ qzone=args.zone
 sjson = args.json
 queries = {}
 rjson = {'WARNING': {}, 'FAIL': {}, 'OK': {}}
+record_types = ['a', 'aaaa', 'afsdb', 'apl', 'caa', 'cdnskey', 'cds', 'cert', 'cname', 'dhcid', 'dlv', 'dname',
+                'dnskey', 'ds', 'hip', 'ipseckey', 'key', 'kx', 'loc', 'mx', 'naptr', 'ns', 'nsec', 'nsec3',
+                'nsec3param', 'ptr', 'rrsig', 'rp', 'sig', 'soa', 'srv', 'sshfp', 'ta', 'tkey', 'tlsa', 'tsig', 'txt']
 
 if qfile is None and query is None and qzone is None:
     exit('Need at least one query to be made')
@@ -73,7 +76,10 @@ else:
 
             if q[0].split('.')[0] != domain.split('.')[0]:
                 record = q[0].split('.')[0]
-                rtype = q[2].lower()
+                if q[2].lower() in record_types:
+                    rtype = q[2].lower()
+                else:
+                    rtype = q[3].lower()
                 queries[record] = rtype
             elif q[0].split('.')[0] == domain.split('.')[0]:
                 rtype = q[3].lower()
