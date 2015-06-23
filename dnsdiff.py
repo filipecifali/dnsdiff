@@ -129,6 +129,8 @@ for query, rtype in queries.iteritems():
         except NoNameservers:
             tmp_result2.append(None)
 
+        tmp_result1.sort()
+        tmp_result2.sort()
         if not tmp_result1 and not tmp_result2:
             print bcolors.WARNING + query, "NOT FOUND", rtype.upper() + bcolors.ENDC
             try:
@@ -138,7 +140,7 @@ for query, rtype in queries.iteritems():
                 rjson['WARNING'][rtype] = []
                 rjson['WARNING'][rtype].append(query)
 
-        elif tmp_result1.sort() == tmp_result2.sort():
+        elif tmp_result1 == tmp_result2:
             if verbosity > 0:
                 print bcolors.OKGREEN + '.'.join([query, domain]), "OK", rtype.upper(), "Address => Nameserver(s): '"\
                     + str(tmp_result1) + "' && Nameserver(s): '" + str(tmp_result2) + "'" + bcolors.ENDC
